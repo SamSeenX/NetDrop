@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="NetDrop - Serverless P2P File Sharing" />
+  <meta name="theme-color" content="#0f172a" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="stylesheet" href="./style.css" />
+  <title>NetDrop</title>
+</head>
+
+<body>
+  <div id="app">
+    <header class="glass-panel">
+      <div class="logo"><img src="/logo.svg" alt="NetDrop" class="logo-icon" />NetDrop</div>
+      <div class="header-right">
+        <div class="my-identity">
+          <span id="my-icon" class="my-icon">🦊</span>
+          <span id="my-name" class="my-name" contenteditable="true">You</span>
+          <button id="save-name-btn" class="save-name-btn hidden" title="Save name">✓</button>
+        </div>
+        <button id="installBtn" class="glass-panel install-btn" style="display: none;">Install</button>
+      </div>
+    </header>
+
+    <main class="radar-container" id="radar">
+      <!-- Devices will be injected here via JS -->
+
+      <!-- Placeholder for 'Scanning' state -->
+      <div class="scanning-pulse" id="scanning-msg" style="grid-column: 1 / -1; color: var(--text-muted);">
+        Scanning for devices...
+      </div>
+    </main>
+
+    <footer class="footer-info">
+      <p>Discovered devices on your network will appear here.</p>
+      <p id="status-line" style="font-size: 0.8rem; opacity: 0.6; font-family: monospace;">
+        Connecting...
+        <button id="toggle-debug"
+          style="background: transparent; border: 1px solid rgba(255,255,255,0.2); color: #94a3b8; padding: 2px 8px; border-radius: 4px; font-size: 0.7rem; cursor: pointer; margin-left: 10px;">🐛
+          Debug</button>
+      </p>
+      <p class="footer-credit">Made with ❤️ by <a href="https://buymeacoffee.com/samseen" target="_blank">SamSeen</a>
+      </p>
+    </footer>
+
+    <!-- File Preview Modal -->
+    <div id="preview-modal" class="preview-modal hidden">
+      <div class="preview-header glass-panel">
+        <h3>📥 Received Files (<span id="file-count">0</span>)</h3>
+        <div class="preview-actions">
+          <button id="download-all-btn" class="btn btn-accent">Download All</button>
+          <button id="minimize-btn" class="btn btn-ghost" title="Minimize">➖</button>
+        </div>
+      </div>
+      <div id="preview-list" class="preview-list">
+        <!-- File cards will be injected here -->
+      </div>
+    </div>
+
+    <!-- Floating Files Button (when minimized) -->
+    <button id="show-files-btn" class="floating-files-btn hidden">
+      📥 <span id="floating-file-count">0</span> Files
+    </button>
+
+    <!-- Transfer History Panel -->
+    <div id="history-panel" class="history-panel hidden">
+      <div class="history-header">
+        <h4>📋 Transfer History</h4>
+        <button id="close-history-btn" class="btn btn-ghost">✕</button>
+      </div>
+      <div id="history-list" class="history-list">
+        <!-- History items will be injected here -->
+      </div>
+    </div>
+
+    <!-- History Toggle Button -->
+    <button id="show-history-btn" class="history-toggle-btn">
+      📋 <span id="history-count">0</span>
+    </button>
+
+    <!-- Active Transfer Toast -->
+    <div id="transfer-toast" class="transfer-toast hidden">
+      <div class="toast-icon">📤</div>
+      <div class="toast-info">
+        <div class="toast-name">Sending file...</div>
+        <div class="toast-progress-bar">
+          <div class="toast-progress-fill" style="width: 0%"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Debug Log (hidden by default) -->
+    <div id="debug-log"
+      style="display: none; position: fixed; bottom: 60px; left: 10px; right: 10px; height: 120px; background: rgba(0,0,0,0.95); color: lime; font-family: monospace; font-size: 10px; overflow-y: scroll; padding: 5px; border-radius: 8px; z-index: 9999;">
+      <button id="close-debug"
+        style="position: sticky; top: 0; right: 0; float: right; background: #ef4444; border: none; color: white; padding: 2px 8px; border-radius: 4px; cursor: pointer; font-size: 10px;">✕
+        Close</button>
+    </div>
+  </div>
+  <script type="module" src="/main.js"></script>
+</body>
+
+</html>
